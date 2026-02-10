@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Store conversation history
     let conversationHistory = [
-        { role: 'system', content: 'You are Comodoc, a helpful, friendly, and secure AI assistant.' }
+        { role: 'system', content: 'You are Komodoc, a helpful, friendly, and secure AI assistant.' }
     ];
 
     // Function to add a message to the chat
@@ -88,7 +88,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const saveButton = document.getElementById('save-button');
     saveButton.addEventListener('click', () => {
         let chatHistory = "==================================================\n";
-        chatHistory += "             COMODOC AI - CHAT HISTORY            \n";
+        chatHistory += "             KOMODOC AI - CHAT HISTORY            \n";
         chatHistory += "==================================================\n";
         chatHistory += `Date: ${new Date().toLocaleString()}\n`;
         chatHistory += "--------------------------------------------------\n\n";
@@ -97,7 +97,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Skipping the first system message
         for (let i = 1; i < conversationHistory.length; i++) {
             const msg = conversationHistory[i];
-            const role = msg.role === 'user' ? 'YOU' : 'COMODOC';
+            const role = msg.role === 'user' ? 'YOU' : 'KOMODOC';
             
             chatHistory += `[${role}]\n`;
             chatHistory += `${msg.content}\n`;

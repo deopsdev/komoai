@@ -1,7 +1,7 @@
 {
-  "name": "comodoc-ai",
+  "name": "komodoc-ai",
   "version": "1.0.0",
-  "description": "Comodoc - Your Privacy-Focused AI Helper",
+  "description": "Komodoc - Your Privacy-Focused AI Helper",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",

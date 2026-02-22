@@ -15,6 +15,8 @@ body {
     --header-h: 120px;
     --footer-h: 64px;
     --input-h: 56px;
+    --header-gap: 24px;
+    --footer-gap: 24px;
 }
 
 header {
@@ -23,7 +25,7 @@ header {
     padding-bottom: 20px;
     margin-bottom: 0;
     position: fixed;
-    top: 0;
+    top: var(--header-gap);
     left: 40px;
     right: 40px;
     background-color: #1e1e1e;
@@ -45,12 +47,13 @@ header p {
 
 #chat-container {
     position: fixed;
-    top: var(--header-h);
+    top: calc(var(--header-h) + var(--header-gap));
     left: 40px;
     right: 40px;
-    bottom: calc(var(--footer-h) + 12px);
-    display: flex;
-    flex-direction: column;
+    bottom: calc(var(--footer-h) + var(--footer-gap) + 12px);
+    display: grid;
+    grid-template-rows: 1fr auto;
+    row-gap: 12px;
     border: none; 
     background-color: transparent;
     padding: 0;
@@ -66,7 +69,7 @@ header p {
     display: flex;
     flex-direction: column; 
     background: transparent;
-    padding-bottom: calc(var(--input-h) + 12px);
+    padding-bottom: 12px;
     width: 100%;
     box-sizing: border-box;
 }
@@ -127,15 +130,12 @@ header p {
     background-color: #252526; 
     padding: 10px 12px;
     border: 1px solid #333;
+    border-top: 1px solid #333;
     border-radius: 4px;
     margin-top: 0;
     width: auto;
     flex-wrap: nowrap;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    z-index: 10;
+    position: static;
     padding-bottom: 6px;
     box-sizing: border-box;
 }
@@ -220,7 +220,7 @@ footer {
     position: fixed;
     left: 0;
     right: 0;
-    bottom: 0;
+    bottom: var(--footer-gap);
     background-color: #1e1e1e;
     z-index: 9;
 }
@@ -244,11 +244,6 @@ footer {
         right: 20px;
         bottom: calc(var(--footer-h) + 10px);
         top: var(--header-h);
-    }
-    .input-area {
-        left: 0;
-        right: 0;
-        bottom: 0;
     }
     .message {
         font-size: 14px;
@@ -305,11 +300,6 @@ footer {
         right: 16px;
         bottom: calc(var(--footer-h) + 8px);
         top: var(--header-h);
-    }
-    .input-area {
-        left: 0;
-        right: 0;
-        bottom: 0;
     }
     .message {
         font-size: 13px;

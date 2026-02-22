@@ -50,6 +50,16 @@ document.addEventListener('DOMContentLoaded', () => {
         adjustLayout();
     }
 
+    function getLocalAIResponse(message) {
+        const lowerMsg = message.toLowerCase();
+        if (lowerMsg.includes('hello') || lowerMsg.includes('hi')) return "Hello! I'm Komo AI (Offline Mode). How can I help you today?";
+        if (lowerMsg.includes('help')) return "I'm here to help! Since I'm offline, I can only answer simple questions. Try asking for the time or date.";
+        if (lowerMsg.includes('time')) return "The current time is " + new Date().toLocaleTimeString();
+        if (lowerMsg.includes('date')) return "Today is " + new Date().toLocaleDateString();
+        if (lowerMsg.includes('who are you')) return "I am Komo AI, a privacy-first assistant.";
+        return "I'm currently offline, but I received your message: \"" + message + "\". Please ensure the server is running for full capabilities.";
+    }
+
     async function sendMessage() {
         const text = userInput.value.trim();
         
@@ -66,8 +76,14 @@ document.addEventListener('DOMContentLoaded', () => {
         chatMessages.appendChild(loadingDiv);
         chatMessages.scrollTop = chatMessages.scrollHeight;
 
+        const hostname = window.location.hostname || '127.0.0.1';
+        // Use 127.0.0.1 instead of localhost to avoid IPv6 issues
+        const host = hostname === 'localhost' ? '127.0.0.1' : hostname;
+        const port = window.location.port;
+        const API_URL = port === '3040' ? '/chat' : `http://${host}:3040/chat`;
+
         try {
-            const response = await fetch('/chat', {
+            const response = await fetch(API_URL, {
                 method: 'POST', 
                 headers: {
                     'Content-Type': 'application/json', 
@@ -83,7 +99,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const data = await response.json();
             
-            chatMessages.removeChild(loadingDiv);
+            if (chatMessages.contains(loadingDiv)) chatMessages.removeChild(loadingDiv);
 
             if (data.error) {
                 addMessage('Error: ' + data.error, 'system');
@@ -93,9 +109,13 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
         } catch (error) {
-            console.error('Error:', error); 
+            console.error('Error:', error);
             if (chatMessages.contains(loadingDiv)) chatMessages.removeChild(loadingDiv);
-            addMessage('Sorry, an error occurred. Please make sure the server is running.', 'system');
+            
+            // Fallback to local AI
+            const localReply = getLocalAIResponse(text);
+            addMessage(localReply, 'ai');
+            conversationHistory.push({ role: 'assistant', content: localReply });
         }
     }
 

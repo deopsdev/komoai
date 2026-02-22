@@ -73,54 +73,56 @@ header p {
     overflow-y: auto;
     border: 2px solid #444;
     border-radius: 4px;
-    padding: 10px;
+    padding: 20px;
     display: flex;
     flex-direction: column; 
     background-color: #252526; 
     box-sizing: border-box;
     min-height: 0; /* Important for flex child scrolling */
-    gap: 6px;
+    gap: 16px;
+    max-width: 900px;
+    width: 100%;
+    align-self: center;
 }
 
 .message {
     margin: 0;
-    padding: 12px 16px;
-    border-radius: 4px; 
-    max-width: 75%; 
+    padding: 16px 20px;
+    border-radius: 8px; 
+    max-width: 80%; 
     word-wrap: break-word; 
     font-size: 16px;
     line-height: 1.6; 
     letter-spacing: 0.5px;
     position: relative;
     flex-shrink: 0;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
 }
 
 .message p {
-    margin-bottom: 15px;
+    margin-bottom: 12px;
 }
 .message p:last-child {
     margin-bottom: 0;
 }
 
 .message.user {
-    background-color: rgba(0, 255, 204, 0.1); 
+    background-color: rgba(0, 255, 204, 0.15); 
     color: #00ffcc; 
     align-self: flex-end; 
     margin-left: auto;
     margin-right: 0;
-    border-right: 3px solid #00ffcc; 
-    padding-right: 16px;
-    text-align: right; 
+    border-right: 4px solid #00ffcc; 
+    text-align: left; 
 }
 
 .message.ai {
-    background-color: rgba(255, 255, 255, 0.05); 
-    color: #d4d4d4; 
+    background-color: #2d2d2d; 
+    color: #e0e0e0; 
     align-self: flex-start; 
     margin-right: auto;
     margin-left: 0;
-    border-left: 3px solid #d4d4d4; 
-    padding-left: 16px;
+    border-left: 4px solid #4a4a4a; 
 }
 
 .message.system {
@@ -135,15 +137,18 @@ header p {
 
 .input-area {
     display: flex;
-    gap: 8px; 
+    gap: 10px; 
     align-items: center;
     background-color: #252526; 
-    padding: 8px;
+    padding: 12px;
     border: 1px solid #333;
     border-radius: 4px;
     box-sizing: border-box;
     flex-shrink: 0;
-    height: 50px;
+    height: 60px;
+    max-width: 900px;
+    width: 100%;
+    align-self: center;
 }
 
 #user-input {
@@ -321,12 +326,13 @@ footer {
     }
     .message {
         font-size: 11px;
-        max-width: 95%;
-        margin: 2px 0;
-        padding: 4px 8px;
+        max-width: 85%;
+        margin: 4px 0;
+        padding: 8px 12px;
     }
     #chat-messages {
-        padding: 4px;
+        padding: 10px;
+        gap: 10px;
     }
     .input-area {
         gap: 4px;
